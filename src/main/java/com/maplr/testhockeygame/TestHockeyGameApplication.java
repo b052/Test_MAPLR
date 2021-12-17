@@ -12,6 +12,7 @@ import com.maplr.testhockeygame.daos.PlayerDao;
 import com.maplr.testhockeygame.daos.TeamDao;
 import com.maplr.testhockeygame.entities.Player;
 import com.maplr.testhockeygame.entities.Team;
+import com.maplr.testhockeygame.enums.Position;
 
 import lombok.extern.java.Log;
 
@@ -33,12 +34,12 @@ public class TestHockeyGameApplication implements CommandLineRunner {
 	public void run(String... strings) throws Exception {
 		log.info("Remplissons notre base de données H2 !");
 
-		Player carey = new Player(31, "Carey", "Price", "goaltender", false);
-		Player nick = new Player(14, "Nick", "Suzuki", "forward", false);
-		Player jesperi = new Player(15, "Jesperi", "Kotkaniemi", "forward", false);
-		Player jake = new Player(71, "Jake", "Evans", "forward", false);
-		Player alexander = new Player(27, "Alexander", "Romanov", "defenseman", false);
-		Player shea = new Player(6, "Shea", "Weber", "forward", true);
+		Player carey = new Player(31, "Carey", "Price", Position.goaltender, false);
+		Player nick = new Player(14, "Nick", "Suzuki", Position.forward, true);
+		Player jesperi = new Player(15, "Jesperi", "Kotkaniemi", Position.forward, false);
+		Player jake = new Player(71, "Jake", "Evans", Position.forward, false);
+		Player alexander = new Player(27, "Alexander", "Romanov", Position.defenseman, false);
+		Player shea = new Player(6, "Shea", "Weber", Position.forward, true);
 
 		List<Player> playerTeam2020 = Arrays.asList(carey, nick, jesperi);
 

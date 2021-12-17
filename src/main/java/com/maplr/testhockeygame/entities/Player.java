@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.maplr.testhockeygame.enums.Position;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,15 +32,15 @@ public class Player {
 
 	@Getter
 	@Setter
-	private String position;
+	private Position position;
 
-	private boolean isCaptain;
+	private Boolean isCaptain;
 
-	public boolean isIsCaptain() {
+	public Boolean isIsCaptain() {
 		return isCaptain;
 	}
 
-	public void setCaptain(boolean isCaptain) {
+	public void setCaptain(Boolean isCaptain) {
 		this.isCaptain = isCaptain;
 	}
 
