@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.maplr.testhockeygame.entities.Player;
 import com.maplr.testhockeygame.services.PlayerService;
 import com.maplr.testhockeygame.services.TeamService;
+import com.maplr.testhockeygame.utilities.PlayerMapper;
 import com.maplr.testhockeygame.utilities.PlayersWithSameNumberInTeamException;
 import com.maplr.testhockeygame.utilities.TeamNotFoundException;
 
@@ -26,7 +27,7 @@ public class RestController {
 	public Object getTeamByYear(@PathVariable(name = "year") long year) {
 
 		try {
-			return teamService.getTeamByYear(year);
+			return PlayerMapper.INSTANCE.teamToTeamMapped(teamService.getTeamByYear(year));
 		} catch (TeamNotFoundException e) {
 			return (e.getMessage());
 		}

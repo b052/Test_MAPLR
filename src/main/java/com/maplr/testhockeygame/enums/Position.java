@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Position {
 
-	DEFENSEMAN("defenseman"), GOALTENDER("goaltender"), FORWARD("forward");
+	defenseman("defenseman"), goaltender("goaltender"), forward("forward");
 
 	@Getter
 	private String value;

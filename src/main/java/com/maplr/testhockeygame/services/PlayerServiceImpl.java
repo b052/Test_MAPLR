@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.maplr.testhockeygame.daos.PlayerDao;
 import com.maplr.testhockeygame.daos.TeamDao;
 import com.maplr.testhockeygame.entities.Player;
+import com.maplr.testhockeygame.entities.PlayerMapped;
 import com.maplr.testhockeygame.entities.Team;
+import com.maplr.testhockeygame.utilities.PlayerMapper;
 import com.maplr.testhockeygame.utilities.PlayersWithSameNumberInTeamException;
 import com.maplr.testhockeygame.utilities.TeamNotFoundException;
 
@@ -25,7 +27,7 @@ public class PlayerServiceImpl implements PlayerService {
 	PlayerDao playerDao;
 
 	@Override
-	public Player savePlayer(Player player, long year)
+	public PlayerMapped savePlayer(Player player, long year)
 			throws TeamNotFoundException, PlayersWithSameNumberInTeamException {
 
 		Optional<Team> team = Optional.of(teamService.getTeamByYear(year));
@@ -45,7 +47,7 @@ public class PlayerServiceImpl implements PlayerService {
 				}
 				team.get().getPlayers().add(player);
 				teamDao.save(team.get());
-				return player;
+				return PlayerMapper.INSTANCE.PlayerToPlayerMapped(player);
 			} else
 				throw new PlayersWithSameNumberInTeamException(
 						"Impossible d'ajouter ce joueur dans l'équipe car il existe dèjà un joueur avec le même numero dans l'équipe !");
@@ -55,7 +57,7 @@ public class PlayerServiceImpl implements PlayerService {
 	}
 
 	@Override
-	public Player updateCaptain(long number) throws TeamNotFoundException {
+	public PlayerMapped updateCaptain(long number) throws TeamNotFoundException {
 
 		Long idTeam = teamDao.getIdTeamByIdPlayer(number);
 		Optional<Team> team = null;
@@ -71,7 +73,7 @@ public class PlayerServiceImpl implements PlayerService {
 				}
 			}
 			teamDao.save(team.get());
-			return playerToReturn;
+			return PlayerMapper.INSTANCE.PlayerToPlayerMapped(playerToReturn);
 		} else
 			throw new TeamNotFoundException("L'équipe n'existe pas dans la base de données !");
 	}
